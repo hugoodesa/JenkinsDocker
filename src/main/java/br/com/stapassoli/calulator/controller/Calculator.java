@@ -21,7 +21,7 @@ public class Calculator {
             .operation(arithmeticOperation.getOperation())
             .result(arithmeticOperation.executeOperation())
             .numA(arithmeticOperation.getNumA())
-            .numA(arithmeticOperation.getNumB())
+            .numB(arithmeticOperation.getNumB())
             .build();
 
         return ResponseEntity.ok(response);
