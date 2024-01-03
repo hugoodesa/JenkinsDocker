@@ -25,6 +25,9 @@ pipeline {
     }
 
     post {
+        success{
+          sh 'cp /var/jenkins_home/workspace/PipeLine/target/calculator.war /app/dev/jenkins_home/calculator.war'
+        }
         always {
             echo 'finished'
         }
