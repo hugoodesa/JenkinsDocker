@@ -17,6 +17,13 @@ pipeline {
                 sh 'mvn test'
             }
         }
+
+        stage('Docker Build') {
+            agent any
+            steps {
+              sh 'docker build -t calculator .'
+            }
+        }
         /* stage('deploy tomcat'){
             steps{
                 deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://172.19.0.2:8082')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
