@@ -24,11 +24,16 @@ pipeline {
               sh 'docker build -t calculator .'
             }
         }
-        /* stage('deploy tomcat'){
-            steps{
-                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://172.19.0.2:8082')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('local_sonar') {
+                    bat '''mvn clean verify sonar:sonar -Dsonar.projectKey=learnJenkins -Dsonar.projectName='learnJenkins' -Dsonar.host.url=http://172.18.0.2:9000''' //port 9000 is default for sonar
+                    echo 'SonarQube Analysis Completed'
+                }
             }
-        } */
+        }
+        
     }
 
     post {
